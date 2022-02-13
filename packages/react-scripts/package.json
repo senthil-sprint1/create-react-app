@@ -1,6 +1,6 @@
 {
   "name": "sprint1-react-scripts",
-  "version": "5.0.0",
+  "version": "5.0.4",
   "description": "Configuration and scripts for Create React App.",
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "utils"
   ],
   "bin": {
-    "react-scripts": "./bin/react-scripts.js"
+    "sprint1-react-scripts": "./bin/react-scripts.js"
   },
   "types": "./lib/react-app.d.ts",
   "dependencies": {
@@ -78,7 +78,8 @@
   },
   "devDependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "@sprint1/pkg-ts": "^0.1.0"
   },
   "optionalDependencies": {
     "fsevents": "^2.3.2"
@@ -103,5 +104,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "typeScriptNodeModulePathsToTranspile": [
+    "@sprint1/pkg-ts"
+  ]
 }

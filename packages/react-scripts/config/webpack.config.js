@@ -95,6 +95,8 @@ const hasJsxRuntime = (() => {
   }
 })();
 
+const sprint1 = require('./sprint1/config');
+
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function (webpackEnv) {
@@ -415,7 +417,7 @@ module.exports = function (webpackEnv) {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: [
                 paths.appSrc,
-                path.resolve('node_modules', '@sprint1/pkg-ts/src'),
+                ...sprint1.getNodeModulePathsToTranspile(paths.appPackageJson),
               ],
               loader: require.resolve('babel-loader'),
               options: {
