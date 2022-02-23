@@ -10,7 +10,7 @@
     "e2e": "tasks/e2e-simple.sh",
     "e2e:docker": "tasks/local-test.sh",
     "postinstall": "npm run build:prod -w react-error-overlay",
-    "publish:react-scripts": "cd packages/react-scripts && npm version patch && npm publish && cd ..",
+    "publish:sprint1-react-scripts": "cd packages/react-scripts && npm version patch && npm publish && cd ..",
     "publish": "tasks/publish.sh",
     "start": "cd packages/react-scripts && node bin/react-scripts.js start",
     "start:debug": "cd packages/react-scripts && node bin/react-scripts.js --inspect-brk start",
