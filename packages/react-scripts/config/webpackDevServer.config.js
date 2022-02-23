@@ -20,6 +20,7 @@ const host = process.env.HOST || '0.0.0.0';
 const sockHost = process.env.WDS_SOCKET_HOST;
 const sockPath = process.env.WDS_SOCKET_PATH; // default: '/ws'
 const sockPort = process.env.WDS_SOCKET_PORT;
+const sockUrl = process.env.SPRINT1_WDS_SOCKET_PROTOCOL || 'wss://0.0.0.0/ws';
 
 module.exports = function (proxy, allowedHost) {
   const disableFirewall =
@@ -78,14 +79,7 @@ module.exports = function (proxy, allowedHost) {
       },
     },
     client: {
-      webSocketURL: {
-        // Enable custom sockjs pathname for websocket connection to hot reloading server.
-        // Enable custom sockjs hostname, pathname and port for websocket connection
-        // to hot reloading server.
-        hostname: sockHost,
-        pathname: sockPath,
-        port: sockPort,
-      },
+      webSocketURL: sockUrl,
       overlay: {
         errors: true,
         warnings: false,
