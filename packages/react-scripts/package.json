@@ -78,8 +78,7 @@
   },
   "devDependencies": {
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "@sprint1/pkg-ts": "^0.1.0"
+    "react-dom": "^18.0.0"
   },
   "optionalDependencies": {
     "fsevents": "^2.3.2"
