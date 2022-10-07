@@ -21,7 +21,6 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const paths = require('./paths');
@@ -311,8 +310,8 @@ module.exports = function (webpackEnv) {
       // https://github.com/facebook/create-react-app/issues/253
       modules: [
         'node_modules',
-        ...sprint1.getNodeModulePathsToResolve(paths.appPackageJson),
         paths.appNodeModules,
+        ...sprint1.getModules(),
       ].concat(modules.additionalModulePaths || []),
       // These are the reasonable defaults supported by the Node ecosystem.
       // We also include JSX as a common component filename extension to support
@@ -333,22 +332,23 @@ module.exports = function (webpackEnv) {
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
         ...(modules.webpackAliases || {}),
+        ...sprint1.getAlias(),
       },
-      plugins: [
-        // Prevents users from importing files from outside of src/ (or node_modules/).
-        // This often causes confusion because we only process files within src/ with babel.
-        // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
-        // please link the files into your node_modules/ and let module-resolution kick in.
-        // Make sure your source files are compiled, as they will not be processed in any way.
-        new ModuleScopePlugin(paths.appSrc, [
-          paths.appPackageJson,
-          reactRefreshRuntimeEntry,
-          reactRefreshWebpackPluginRuntimeEntry,
-          babelRuntimeEntry,
-          babelRuntimeEntryHelpers,
-          babelRuntimeRegenerator,
-        ]),
-      ],
+      // plugins: [
+      //   // Prevents users from importing files from outside of src/ (or node_modules/).
+      //   // This often causes confusion because we only process files within src/ with babel.
+      //   // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
+      //   // please link the files into your node_modules/ and let module-resolution kick in.
+      //   // Make sure your source files are compiled, as they will not be processed in any way.
+      //   new ModuleScopePlugin(paths.appSrc, [
+      //     paths.appPackageJson,
+      //     reactRefreshRuntimeEntry,
+      //     reactRefreshWebpackPluginRuntimeEntry,
+      //     babelRuntimeEntry,
+      //     babelRuntimeEntryHelpers,
+      //     babelRuntimeRegenerator,
+      //   ]),
+      // ],
     },
     module: {
       strictExportPresence: true,
@@ -419,10 +419,7 @@ module.exports = function (webpackEnv) {
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
-              include: [
-                paths.appSrc,
-                ...sprint1.getNodeModulePathsToTranspile(paths.appPackageJson),
-              ],
+              include: [paths.appSrc, ...sprint1.getPathsToProcessByBabel()],
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve(
