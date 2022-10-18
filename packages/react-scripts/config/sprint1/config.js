@@ -40,11 +40,12 @@ function getAlias() {
 }
 
 function getPathsToProcessByBabel() {
-  const sprintPkgSrcPath = 'src/@sprint1/pkg/src';
+  const sprintPkgLocalSrcPath = 'src/@sprint1/pkg/src';
+  const sprintPkgSrcPath = '@sprint1/pkg/src';
 
   const pathsToProcess = [];
 
-  if (fs.existsSync(resolveApp(sprintPkgSrcPath))) {
+  if (fs.existsSync(resolveApp(sprintPkgLocalSrcPath))) {
     pathsToProcess.push(fs.realpathSync(resolveApp(sprintPkgSrcPath)));
   } else {
     const nodeModuleSprintPkgPath = resolveApp(
