@@ -27,13 +27,17 @@ function getModules() {
   return modules;
 }
 
-function getAlias() {
+function getAlias(isProductionEnv) {
   const aliasName = '@sprint1/pkg';
   const sprintPkgPath = 'src/@sprint1/pkg';
   const alias = {};
 
   if (fs.existsSync(resolveApp(sprintPkgPath))) {
     alias[aliasName] = resolveApp(sprintPkgPath);
+  }
+  if (isProductionEnv) {
+    // Disables packing translation files as part of production build
+    alias['locale/en/translation.json'] = false;
   }
   console.log('alias', alias);
   return alias;
