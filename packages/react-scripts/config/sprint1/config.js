@@ -50,7 +50,7 @@ function getPathsToProcessByBabel() {
   const pathsToProcess = [];
 
   if (fs.existsSync(resolveApp(sprintPkgLocalSrcPath))) {
-    pathsToProcess.push(fs.realpathSync(resolveApp(sprintPkgSrcPath)));
+    pathsToProcess.push(fs.realpathSync(resolveApp(sprintPkgLocalSrcPath)));
   } else {
     const nodeModuleSprintPkgPath = resolveApp(
       'node_modules/' + sprintPkgSrcPath
