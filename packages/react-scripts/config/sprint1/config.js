@@ -38,6 +38,7 @@ function getAlias(isProductionEnv) {
   if (isProductionEnv) {
     // Disables packing translation files as part of production build
     alias['locale/en/translation.json'] = false;
+    alias['locale/es/translation.json'] = false;
   }
 
   const packageJson = require(resolveApp('package.json'));
