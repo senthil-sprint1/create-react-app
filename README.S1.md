@@ -1,5 +1,11 @@
 # Sprint1 Fork of create-react-app
 
+# Publish package
+
+```
+npm run publish
+```
+
 ### List remotes
 
 ```

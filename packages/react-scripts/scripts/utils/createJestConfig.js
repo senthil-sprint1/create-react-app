@@ -49,7 +49,12 @@ module.exports = (resolve, rootDir, isEjecting) => {
       ),
     },
     transformIgnorePatterns: [
-      '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
+      // following line is original
+      // '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
+
+      //@sprint1 allow babel to process typescript files from @sprint1 package.
+      'node_modules/(?!(@sprint1)/)',
+
       '^.+\\.module\\.(css|sass|scss)$',
     ],
     modulePaths: modules.additionalModulePaths || [],
