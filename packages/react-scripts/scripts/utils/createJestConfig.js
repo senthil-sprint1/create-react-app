@@ -12,6 +12,8 @@ const chalk = require('react-dev-utils/chalk');
 const paths = require('../../config/paths');
 const modules = require('../../config/modules');
 
+const sprint1 = require('../../config/sprint1/config');
+
 module.exports = (resolve, rootDir, isEjecting) => {
   // Use this instead of `paths.testsSetup` to avoid putting
   // an absolute filename into configuration after ejecting.
@@ -62,6 +64,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
       '^react-native$': 'react-native-web',
       '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
       ...(modules.jestAliases || {}),
+      ...(sprint1.getJestAlias() || {}),
     },
     moduleFileExtensions: [...paths.moduleFileExtensions, 'node'].filter(
       ext => !ext.includes('mjs')

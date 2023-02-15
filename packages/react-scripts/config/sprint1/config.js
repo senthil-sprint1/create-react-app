@@ -71,8 +71,20 @@ function getPathsToProcessByBabel() {
   return pathsToProcess;
 }
 
+function getJestAlias() {
+  const jestAlias = {};
+  const packageJson = require(resolveApp('package.json'));
+  if (packageJson.name === '@sprint1/pkg') {
+    jestAlias['^@sprint1/pkg/src/(.*)$'] = '<rootDir>/src/$1';
+  }
+
+  console.log('jestAlias', jestAlias);
+  return jestAlias;
+}
+
 module.exports = {
   getAlias: getAlias,
+  getJestAlias: getJestAlias,
   getModules: getModules,
   getPathsToProcessByBabel: getPathsToProcessByBabel,
 };
